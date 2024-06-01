@@ -3,6 +3,7 @@ package com.kujudy.springbootmall.controller;
 import com.kujudy.springbootmall.dto.ProductRequest;
 import com.kujudy.springbootmall.model.Product;
 import com.kujudy.springbootmall.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,10 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<Product> createProduct(@RequestBody ProductRequest productRequest) {
+    public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest) {
         Integer productId = productService.createProduct(productRequest);
         Product product = productService.getProductById(productId);
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
+
 }
