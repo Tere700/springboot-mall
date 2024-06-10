@@ -187,6 +187,20 @@ public class ProductControllerTest {
     }
 
     @Test
+    public void getProducts() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/products");
+
+        mockMvc.perform(requestBuilder)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.limit", notNullValue()))
+                .andExpect(jsonPath("$.offset", notNullValue()))
+                .andExpect(jsonPath("$.total", notNullValue()))
+                .andExpect(jsonPath("$.results", hasSize(5)));
+    }
+
+    @Test
     public void getProducts_filtering() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/products")
