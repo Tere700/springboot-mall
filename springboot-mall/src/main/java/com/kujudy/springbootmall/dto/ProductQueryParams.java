@@ -2,7 +2,7 @@ package com.kujudy.springbootmall.dto;
 
 import com.kujudy.springbootmall.constant.ProductCategory;
 
-public class ProductQueryParams {
+public class ProductQueryParams { //專門裝前端傳過來的值
     private ProductCategory category;
     private String search;
     private String orderBy;
