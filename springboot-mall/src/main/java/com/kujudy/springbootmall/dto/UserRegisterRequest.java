@@ -1,10 +1,12 @@
 package com.kujudy.springbootmall.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class UserRegisterRequest {  //專門裝前端傳過來的值
 
     @NotBlank
+    @Email   //檢查email帳號
     String email;
 
     @NotBlank

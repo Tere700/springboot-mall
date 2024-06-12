@@ -5,5 +5,8 @@ import com.kujudy.springbootmall.model.User;
 
 public interface UserDao {
     Integer createUser(UserRegisterRequest userRegisterRequest);
+
+    User getUserByEmail(String email);
+
     User getUserById(Integer userId);
 }
