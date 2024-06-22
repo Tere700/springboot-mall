@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -33,6 +34,7 @@ public class UserControllerTest {
 
     private  ObjectMapper objectMapper = new ObjectMapper();
 
+    @Transactional
     @Test
     public void register_success() throws Exception {
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
@@ -59,6 +61,7 @@ public class UserControllerTest {
         assertNotEquals(userRegisterRequest.getPassword(), user.getPassword());
     }
 
+    @Transactional
     @Test
     public void register_invalidEmailFormat() throws Exception {
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
@@ -76,6 +79,7 @@ public class UserControllerTest {
                 .andExpect(status().is(400));
     }
 
+    @Transactional
     @Test
     public void register_emailAlreadyExist() throws Exception {
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
@@ -96,6 +100,7 @@ public class UserControllerTest {
 
     }
 
+    @Transactional
     @Test
     public void login_success() throws Exception {
         // 先註冊新帳號
@@ -124,6 +129,8 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.createdDate", notNullValue()))
                 .andExpect(jsonPath("$.lastModifiedDate", notNullValue()));
     }
+
+    @Transactional
     @Test
     public void login_wrongPassword() throws Exception {
         // 先註冊新帳號
@@ -148,6 +155,8 @@ public class UserControllerTest {
         mockMvc.perform(requestBuilder)
                 .andExpect(status().is(400));
     }
+
+    @Transactional
     @Test
     public void login_invalidEmailFormat() throws Exception {
         UserLoginRequest userLoginRequest = new UserLoginRequest();
@@ -164,6 +173,7 @@ public class UserControllerTest {
                 .andExpect(status().is(400));
     }
 
+    @Transactional
     @Test
     public void login_emailNotExist() throws Exception {
         UserLoginRequest userLoginRequest = new UserLoginRequest();
