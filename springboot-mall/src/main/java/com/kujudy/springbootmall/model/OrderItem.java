@@ -1,11 +1,15 @@
 package com.kujudy.springbootmall.model;
 
 public class OrderItem {
-    Integer orderItemId;
-    Integer orderId;
-    Integer productId;
-    Integer quantity;
-    Integer amount;
+    private Integer orderItemId;
+    private Integer orderId;
+    private Integer productId;
+    private Integer quantity;
+    private Integer amount;
+
+    private String productName;
+    private String imageUrl;
+
 
     public Integer getAmount() {
         return amount;
@@ -45,5 +49,21 @@ public class OrderItem {
 
     public void setOrderItemId(Integer orderItemId) {
         this.orderItemId = orderItemId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

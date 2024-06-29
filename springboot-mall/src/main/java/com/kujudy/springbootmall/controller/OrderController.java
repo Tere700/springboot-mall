@@ -1,6 +1,7 @@
 package com.kujudy.springbootmall.controller;
 
 import com.kujudy.springbootmall.dto.CreateOrderRequest;
+import com.kujudy.springbootmall.model.Order;
 import com.kujudy.springbootmall.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,10 @@ public class OrderController {
     @PostMapping("/users/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOrderRequest createOrderRequest){
-       Integer oroderId = orderService.createOrder(userId, createOrderRequest);
-       return ResponseEntity.status(HttpStatus.CREATED).body(oroderId);
+       Integer orderId = orderService.createOrder(userId, createOrderRequest);
+
+       Order order = orderService.getOrderById(orderId);
+
+       return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 }
